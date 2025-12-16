@@ -187,13 +187,17 @@
     text-align: center;
    }
 
-   .social{
-    padding: 5px;
+   .social {
+    /* تعديل المسافة حول القسم */
     margin-top: 20px; 
-    /* هذا هو الخط الفاصل الثابت الآن */
     border-top: 1px solid rgba(255, 255, 255, 0.1); 
     padding-top: 25px; 
+    display: flex; /* تنسيق العناصر داخل `.social` */
+    flex-direction: column; /* جعل الأيقونات تظهر عمودياً */
+    align-items: center; /* محاذاة العناصر في المنتصف */
+    gap: 20px; /* إضافة مسافة ثابتة بين العناصر */
    }
+
    .social a{
     text-decoration: none;
     color: var(--secondary); 
@@ -211,8 +215,9 @@
     display: block;
     text-decoration: none;
     width: 70%; 
-    margin-top: 30px;
+    margin-top: 10px; /* تقليل المسافة العليا */
     margin-left: 15%;
+    margin-bottom: 20px; /* تثبيت المسافات السفلية مع العناصر */
     background: linear-gradient(to top right, var(--primary), var(--secondary)); 
     padding: 18px 30px; 
     border-radius: 40px; 
