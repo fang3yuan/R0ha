@@ -52,24 +52,25 @@
    body{
     background: var(--back_color);
     width: 100vw;
-    min-height: 100vh; /* للتأكد من أن الارتفاع يتناسب مع المحتوى */
-    overflow-y: auto; /* للسماح بتمرير الصفحة إذا طالت */
+    min-height: 100vh; 
+    overflow-y: auto; 
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* <--- التعديل لحل مشكلة الثبات: تثبيت العناصر في الأعلى */
-    padding-top: 30px; /* إضافة مسافة من الأعلى */
-    padding-bottom: 30px; /* إضافة مسافة من الأسفل */
+    align-items: flex-start; 
+    padding-top: 30px; 
+    padding-bottom: 30px; 
    }
 
    .vcard{
     width: 480px; 
-    max-height: 90vh; /* <--- تحديد أقصى ارتفاع للبطاقة بالنسبة للشاشة */
+    max-height: 90vh; 
     background: var(--front_color);
     border-radius: 25px; 
     box-shadow: var(--shadow-soft), var(--soft-glow); 
-    overflow-y: auto; /* <--- للسماح بتمرير المحتوى داخل البطاقة */
+    overflow-y: auto; 
     border: 1px solid rgba(255, 255, 255, 0.1); 
     animation: pulse-soft 6s infinite ease-in-out;
+    position: relative; /* تم الإبقاء عليه لمرونة التصميم الداخلي */
    }
    .vcard:hover{
      transform: scale(1.02) translateY(-5px); 
@@ -162,7 +163,7 @@
 
    .card_content{
     position: relative;
-    top: 0; /* <--- التعديل لجعل المحتوى يبدأ مباشرة وعدم وجود حركة غير مرغوب فيها */
+    top: 0; 
     text-align: center;
     padding: 0 40px;
    }
@@ -192,9 +193,10 @@
    .social{
     padding: 5px;
     margin-top: 20px; 
-    /* هذا هو الخط الفاصل الثابت الآن */
+    /* هذا الخط الأصلي (بين النص والأيقونات) */
     border-top: 1px solid rgba(255, 255, 255, 0.1); 
     padding-top: 25px; 
+    padding-bottom: 5px; /* تقليل المسافة من الأسفل للاقتراب من الفاصل */
    }
    .social a{
     text-decoration: none;
@@ -213,7 +215,7 @@
     display: block;
     text-decoration: none;
     width: 70%; 
-    margin-top: 30px;
+    margin-top: 15px; /* تقليل المسافة بعد الخط الفاصل */
     margin-left: 15%;
     background: linear-gradient(to top right, var(--primary), var(--secondary)); 
     padding: 18px 30px; 
@@ -223,7 +225,7 @@
     letter-spacing: 2px;
     box-shadow: 0px 5px 20px rgba(0,0,0,0.4); 
     border: 2px solid var(--front_color);
-    margin-bottom: 20px; /* إضافة مسافة لزر القناة */
+    margin-bottom: 20px; 
    }
    .satanic:hover{
     box-shadow: 0px 8px 30px var(--secondary); 
@@ -231,62 +233,22 @@
     background: linear-gradient(to top right, var(--secondary), var(--primary)); 
    }
 
-   #websites-btn {
-    position: fixed;
-    bottom: 30px; 
-    right: 30px;
-    background: var(--primary); 
-    color: var(--front_color); 
-    border-radius: 50%; 
-    width: 60px; 
-    height: 60px;
-    font-size: 28px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.8);
-    border: 2px solid var(--secondary);
-   }
-   #websites-btn:hover {
-    background: var(--secondary); 
-    transform: scale(1.1); 
+   /* تعريف الستايل للخط الفاصل الجديد */
+   .separator-line {
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent);
+    margin: 20px auto 10px auto; /* المسافة بين الأيقونات والزر */
+    border-radius: 2px;
+    opacity: 0.7;
    }
 
-   #websites-list {
-    position: fixed;
-    bottom: 110px; 
-    right: 30px;
-    background: rgba(44, 44, 46, 0.8); 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 20px; 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-    width: 280px; 
-    max-height: 0;
-    overflow: hidden;
-    z-index: 999;
-    border: 1px solid var(--secondary); 
-   }
+   /* تم حذف أنماط #websites-btn و #websites-list */
 
-   #websites-list.show {
-    max-height: 450px; 
-    padding: 15px 0;
-   }
-
-   #websites-list a {
-    display: block;
-    padding: 18px 30px;
-    color: var(--text_color);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    font-weight: 500;
-   }
-   #websites-list a:hover {
-    background: rgba(138, 123, 155, 0.2); 
-    color: var(--secondary);
-    letter-spacing: 1px;
-   }
-   
    @media (max-width: 600px) {
     .vcard {
         width: 95%; 
-        max-height: 95vh; /* التأكد من أن البطاقة لا تزال مناسبة على الشاشات الصغيرة */
+        max-height: 95vh; 
         height: auto; 
     }
    }
@@ -318,18 +280,11 @@
     <div class="social">
      <a href="https://t.me/Roha_us" aria-label="Telegram Account"><i aria-hidden="true" class="fa fa-telegram"></i></a>
     </div>
+
+    <div class="separator-line"></div>
+    
     <a class="satanic" href="https://t.me/roha_info"><i class="fa fa-heart"></i> JOIN CHANNEL</a>
    </div>
-  </div>
-
-  <button id="websites-btn" aria-label="مواقع ويب">
-   <i class="fa fa-globe"></i>
-  </button>
-
-  <div id="websites-list" aria-hidden="true">
-   <a href="" target="_blank" rel="noopener noreferrer">empty</a>
-   <a href="" target="_blank" rel="noopener noreferrer">empty</a>
-   <a href="" target="_blank" rel="noopener noreferrer">empty</a>
   </div>
 
   <script>
@@ -345,25 +300,7 @@
    }
    var typed = new Typed(".typed_text", options);
 
-   // جافاسكريبت لفتح وإغلاق القائمة عند الضغط على الزر
-   const btn = document.getElementById('websites-btn');
-   const list = document.getElementById('websites-list');
-
-   btn.addEventListener('click', () => {
-    const isShown = list.classList.toggle('show');
-    list.setAttribute('aria-hidden', !isShown);
-    // تغيير أيقونة الزر عند الفتح
-    btn.querySelector('i').className = isShown ? 'fa fa-times' : 'fa fa-globe';
-   });
-
-   // إغلاق القائمة عند الضغط خارجها
-   document.addEventListener('click', (e) => {
-    if (!list.contains(e.target) && !btn.contains(e.target)) {
-     list.classList.remove('show');
-     list.setAttribute('aria-hidden', 'true');
-     btn.querySelector('i').className = 'fa fa-globe'; // إعادة الأيقونة الأصلية
-    }
-   });
+   /* تم إزالة كود الجافاسكريبت الخاص بـ websites-btn و websites-list */
   </script>
  </body>
 </html>
