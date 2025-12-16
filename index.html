@@ -52,20 +52,22 @@
    body{
     background: var(--back_color);
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh; /* للتأكد من أن الارتفاع يتناسب مع المحتوى */
+    overflow-y: auto; /* للسماح بتمرير الصفحة إذا طالت */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* <--- التعديل لحل مشكلة الثبات: تثبيت العناصر في الأعلى */
+    padding-top: 30px; /* إضافة مسافة من الأعلى */
+    padding-bottom: 30px; /* إضافة مسافة من الأسفل */
    }
 
    .vcard{
     width: 480px; 
-    height: 520px; /* <--- تم تعديل ارتفاع البطاقة لتقصيرها */
+    max-height: 90vh; /* <--- تحديد أقصى ارتفاع للبطاقة بالنسبة للشاشة */
     background: var(--front_color);
     border-radius: 25px; 
     box-shadow: var(--shadow-soft), var(--soft-glow); 
-    overflow: hidden;
+    overflow-y: auto; /* <--- للسماح بتمرير المحتوى داخل البطاقة */
     border: 1px solid rgba(255, 255, 255, 0.1); 
     animation: pulse-soft 6s infinite ease-in-out;
    }
@@ -160,7 +162,7 @@
 
    .card_content{
     position: relative;
-    top: 5%;
+    top: 0; /* <--- التعديل لجعل المحتوى يبدأ مباشرة وعدم وجود حركة غير مرغوب فيها */
     text-align: center;
     padding: 0 40px;
    }
@@ -221,6 +223,7 @@
     letter-spacing: 2px;
     box-shadow: 0px 5px 20px rgba(0,0,0,0.4); 
     border: 2px solid var(--front_color);
+    margin-bottom: 20px; /* إضافة مسافة لزر القناة */
    }
    .satanic:hover{
     box-shadow: 0px 8px 30px var(--secondary); 
@@ -283,7 +286,8 @@
    @media (max-width: 600px) {
     .vcard {
         width: 95%; 
-        height: auto; /* <--- يضمن التكيف على شاشات الجوال */
+        max-height: 95vh; /* التأكد من أن البطاقة لا تزال مناسبة على الشاشات الصغيرة */
+        height: auto; 
     }
    }
   </style>
