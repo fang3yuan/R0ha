@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#8A7B9B"/>
   <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="@Ob_i9" name="description"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
@@ -29,8 +30,17 @@
    }
 
    /* ----------------------------------- */
-   /* الإطارات الشاملة */
+   /* إطارات الحركة */
    /* ----------------------------------- */
+   @keyframes rotate{
+    100%{ transform: rotate(360deg); }
+   }
+   @keyframes pulse-soft {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+    100% { transform: scale(1); }
+   }
+
    *{
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -46,8 +56,7 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* تعديل للاعتماد على الأعلى */
-    padding-top: 30px; /* لضبط اللوحة بحيث تكون عالية بشكل أكبر */
+    align-items: center;
    }
 
    .vcard{
@@ -59,24 +68,151 @@
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1); 
     animation: pulse-soft 6s infinite ease-in-out;
-    margin-top: -20px; /* رفع البطاقة قليلاً */
    }
    .vcard:hover{
      transform: scale(1.02) translateY(-5px); 
      box-shadow: 0 15px 45px rgba(0,0,0,0.8), 0 0 25px var(--secondary);
    }
 
-   /* ----------------------------------- */
-   /* تخصيص الأزرار */
-   /* ----------------------------------- */
+   .header{
+    height: 40%;
+    position: relative;
+   }
+
+   .wave_bg{
+    border-radius: 25px 25px 0 0; 
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+   }
+
+   /* الأمواج المتحركة (Waves) */
+   .wave-01{
+    position: absolute;
+    width: 650px; 
+    height: 650px;
+    background: linear-gradient(to top right, var(--primary), var(--secondary));
+    border-radius: 50%;
+    top: -150%; 
+    left: -20%;
+    animation: rotate 20s linear infinite; 
+   }
+   .wave-02{
+    position: absolute;
+    width: 680px; 
+    height: 680px;
+    background: linear-gradient(to top right, var(--primary), var(--secondary));
+    border-radius: 40%;
+    top: -160%; 
+    left: -22%;
+    opacity: 0.4;
+    animation: rotate 30s linear infinite reverse; 
+   }
+   .wave-03{
+    position: absolute;
+    width: 620px; 
+    height: 620px;
+    background: linear-gradient(to top right, var(--primary), var(--secondary));
+    border-radius: 45%;
+    top: -140%; 
+    left: -18%;
+    opacity: 0.15;
+    animation: rotate 40s linear infinite;
+   }
+
+   .profile_pic_content{
+    width: 170px; 
+    height: 170px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 85%;
+    outline: 10px solid var(--front_color); 
+    outline-offset: 1px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+   }
+   /* توهج نيون أحمر */
+   .profile_pic_content::after{
+    content: '';
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #FF0000, #A00000); 
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+   }
+   .profile_pic_content:hover::after{
+    opacity: 0.8; 
+    box-shadow: 0 0 40px #FF0000; 
+    transform: scale(1.05); 
+   }
+
+   .profile_pic{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 100%;
+    display: block;
+   }
+
+   .card_content{
+    position: relative;
+    top: 5%;
+    text-align: center;
+    padding: 0 40px;
+   }
+
+   /* الاسم أسفل الصورة */
+   .satan{
+    color: #FF0000; 
+    font-weight: 700; 
+    font-size: 1.8em; 
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); 
+    margin-top: 40px; 
+   }
+   /* **التعديل الهام: تم زيادة min-height إلى 110px لتثبيت الخط الفاصل** */
+   .snuff{
+    margin-top: 15px;
+    color: var(--muted_text);
+    padding: 0px 10px;
+    font-size: 1.1em;
+    min-height: 110px; 
+   }
+
+   .typed_text{
+    text-align: center;
+   }
+
+   .social{
+    padding: 5px;
+    margin-top: 20px; 
+    /* هذا هو الخط الفاصل الثابت الآن */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); 
+    padding-top: 25px; 
+   }
+   .social a{
+    text-decoration: none;
+    color: var(--secondary); 
+    font-size: 2em; 
+    margin: 0 15px;
+   }
+   .social a:hover{
+    color: var(--primary);
+    transform: translateY(-5px); 
+    filter: brightness(1.2);
+   }
+   
    .satanic{ 
     cursor: pointer;
     display: block;
     text-decoration: none;
     width: 70%; 
-    margin-top: 10px; /* تقليل المسافة العليا */
+    margin-top: 30px;
     margin-left: 15%;
-    margin-bottom: 20px; /* تثبيت المسافات السفلية مع العناصر */
     background: linear-gradient(to top right, var(--primary), var(--secondary)); 
     padding: 18px 30px; 
     border-radius: 40px; 
@@ -94,7 +230,7 @@
 
    #websites-btn {
     position: fixed;
-    bottom: 60px; /* رفع الزر العائم للأعلى قليلاً */
+    bottom: 30px; 
     right: 30px;
     background: var(--primary); 
     color: var(--front_color); 
@@ -108,6 +244,47 @@
    #websites-btn:hover {
     background: var(--secondary); 
     transform: scale(1.1); 
+   }
+
+   #websites-list {
+    position: fixed;
+    bottom: 110px; 
+    right: 30px;
+    background: rgba(44, 44, 46, 0.8); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px; 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    width: 280px; 
+    max-height: 0;
+    overflow: hidden;
+    z-index: 999;
+    border: 1px solid var(--secondary); 
+   }
+
+   #websites-list.show {
+    max-height: 450px; 
+    padding: 15px 0;
+   }
+
+   #websites-list a {
+    display: block;
+    padding: 18px 30px;
+    color: var(--text_color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-weight: 500;
+   }
+   #websites-list a:hover {
+    background: rgba(138, 123, 155, 0.2); 
+    color: var(--secondary);
+    letter-spacing: 1px;
+   }
+   
+   @media (max-width: 600px) {
+    .vcard {
+        width: 95%; 
+        height: auto;
+    }
    }
   </style>
  </head>
@@ -131,7 +308,9 @@
     <div class="satan">
      <h4>𝑹𝑶𝑯𝑨 - ✦</h4>
     </div>
-    <div class="typed_text"><i>HELLO WORLD</i></div>
+    <div class="snuff">
+     <h5 class="typed_text"><i>HELLO WORLD</i></h5>
+    </div>
     <div class="social">
      <a href="https://t.me/Roha_us" aria-label="Telegram Account"><i aria-hidden="true" class="fa fa-telegram"></i></a>
     </div>
@@ -143,20 +322,42 @@
    <i class="fa fa-globe"></i>
   </button>
 
+  <div id="websites-list" aria-hidden="true">
+   <a href="" target="_blank" rel="noopener noreferrer">empty</a>
+   <a href="" target="_blank" rel="noopener noreferrer">empty</a>
+   <a href="" target="_blank" rel="noopener noreferrer">empty</a>
+  </div>
+
   <script>
-   // فتح وإغلاق قائمة التعبئة عند الضغط
+   // تحديث الجملة المتحركة
+   var options = {
+    strings: [
+      "<b></b>",
+      "𝐼 𝐴𝑀 𝑅𝑂𝐻𝐴, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "
+    ],
+    typeSpeed: 10, 
+    backSpeed: 0, 
+    loop: false 
+   }
+   var typed = new Typed(".typed_text", options);
+
+   // جافاسكريبت لفتح وإغلاق القائمة عند الضغط على الزر
    const btn = document.getElementById('websites-btn');
    const list = document.getElementById('websites-list');
 
    btn.addEventListener('click', () => {
     const isShown = list.classList.toggle('show');
+    list.setAttribute('aria-hidden', !isShown);
+    // تغيير أيقونة الزر عند الفتح
     btn.querySelector('i').className = isShown ? 'fa fa-times' : 'fa fa-globe';
    });
 
-   // إغلاق القائمة تمامًا عند الضغط خارجها
+   // إغلاق القائمة عند الضغط خارجها
    document.addEventListener('click', (e) => {
     if (!list.contains(e.target) && !btn.contains(e.target)) {
      list.classList.remove('show');
+     list.setAttribute('aria-hidden', 'true');
+     btn.querySelector('i').className = 'fa fa-globe'; // إعادة الأيقونة الأصلية
     }
    });
   </script>
