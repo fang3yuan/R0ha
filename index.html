@@ -21,139 +21,149 @@
     --secondary: #D3A9B2; 
     --text_color: #F0F0F0; 
     --muted_text: #C0C0C0; 
+    --red_neon: #FF0000;
     --shadow-soft: 0 10px 30px rgba(0,0,0,0.6); 
     --soft-glow: 0 0 15px rgba(138, 123, 155, 0.3);
    }
 
    @keyframes rotate{ 100%{ transform: rotate(360deg); } }
    @keyframes pulse-soft { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
+   
+   /* أنيميشن تموجات الموسيقى */
+   @keyframes musicRipple {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+   }
 
-   *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s ease-in-out; }
+   *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.4s ease-in-out; }
 
    body{
     background: var(--back_color);
     width: 100vw;
     min-height: 100vh; 
-    overflow-y: auto; 
     display: flex;
     justify-content: center;
     align-items: flex-start; 
     padding-top: 30px; 
     padding-bottom: 30px; 
+    overflow-x: hidden;
    }
 
    .vcard{
     width: 480px; 
-    max-height: 90vh; 
     background: var(--front_color);
     border-radius: 25px; 
     box-shadow: var(--shadow-soft), var(--soft-glow); 
-    overflow-y: auto; 
     border: 1px solid rgba(255, 255, 255, 0.1); 
     animation: pulse-soft 6s infinite ease-in-out;
     position: relative;
+    z-index: 10;
    }
-   .vcard:hover{ transform: scale(1.02) translateY(-5px); box-shadow: 0 15px 45px rgba(0,0,0,0.8), 0 0 25px var(--secondary); }
 
-   .header{ height: 40%; position: relative; }
+   .header{ height: 200px; position: relative; }
    .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: hidden; }
 
-   .wave-01{ position: absolute; width: 650px; height: 650px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; }
-   .wave-02{ position: absolute; width: 680px; height: 680px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 40%; top: -160%; left: -22%; opacity: 0.4; animation: rotate 30s linear infinite reverse; }
-   .wave-03{ position: absolute; width: 620px; height: 620px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 45%; top: -140%; left: -18%; opacity: 0.15; animation: rotate 40s linear infinite; }
+   .wave-01, .wave-02, .wave-03{ position: absolute; width: 650px; height: 650px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; }
+   .wave-02{ opacity: 0.4; animation-duration: 30s; animation-direction: reverse; }
+   .wave-03{ opacity: 0.15; animation-duration: 40s; }
 
-   .profile_pic_content{ width: 170px; height: 170px; border-radius: 50%; position: absolute; left: 50%; transform: translate(-50%, -50%); top: 85%; outline: 10px solid var(--front_color); outline-offset: 1px; box-shadow: 0 0 20px rgba(0,0,0,0.9); }
-   .profile_pic_content::after{ content: ''; border-radius: 50%; width: 100%; height: 100%; background: linear-gradient(to right, #FF0000, #A00000); position: absolute; top: 0; left: 0; z-index: -1; opacity: 0; }
-   .profile_pic_content:hover::after{ opacity: 0.8; box-shadow: 0 0 40px #FF0000; transform: scale(1.05); }
+   /* حاوية الصورة مع تفعيل التفاعل */
+   .profile_pic_content{ 
+    width: 170px; 
+    height: 170px; 
+    border-radius: 50%; 
+    position: absolute; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    top: 85%; 
+    outline: 10px solid var(--front_color); 
+    box-shadow: 0 0 20px rgba(0,0,0,0.9); 
+    cursor: pointer;
+    z-index: 20;
+   }
 
-   .profile_pic{ max-width: 100%; max-height: 100%; border-radius: 100%; display: block; }
+   /* تأثير التموجات (يعمل فقط عند إضافة class 'playing') */
+   .profile_pic_content.playing::before,
+   .profile_pic_content.playing::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: var(--red_neon);
+    z-index: -1;
+    animation: musicRipple 1.5s linear infinite;
+   }
+   .profile_pic_content.playing::after { animation-delay: 0.75s; }
 
-   .card_content{ position: relative; top: 0; text-align: center; padding: 0 40px; }
+   .profile_pic{ max-width: 100%; border-radius: 100%; display: block; position: relative; z-index: 2; }
 
-   .satan{ color: #FF0000; font-weight: 700; font-size: 1.8em; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); margin-top: 40px; }
-   .snuff{ margin-top: 15px; color: var(--muted_text); padding: 0px 10px; font-size: 1.1em; min-height: 110px; }
+   .card_content{ text-align: center; padding: 60px 40px 20px 40px; }
+   .satan{ color: var(--red_neon); font-weight: 700; font-size: 1.8em; text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
+   .snuff{ margin-top: 15px; color: var(--muted_text); min-height: 110px; }
 
-   .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; padding-bottom: 5px; }
-   .social a{ text-decoration: none; color: var(--secondary); font-size: 2em; margin: 0 15px; }
-   .social a:hover{ color: var(--primary); transform: translateY(-5px); filter: brightness(1.2); }
+   .social{ margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; }
+   .social a{ color: var(--secondary); font-size: 2em; margin: 0 15px; text-decoration: none; }
    
-   .satanic{ cursor: pointer; display: block; text-decoration: none; width: 70%; margin-top: 15px; margin-left: 15%; background: linear-gradient(to top right, var(--primary), var(--secondary)); padding: 18px 30px; border-radius: 40px; color: var(--front_color); font-weight: 800; letter-spacing: 2px; box-shadow: 0px 5px 20px rgba(0,0,0,0.4); border: 2px solid var(--front_color); margin-bottom: 20px; }
-   .satanic:hover{ box-shadow: 0px 8px 30px var(--secondary); transform: translateY(-2px) scale(1.05); background: linear-gradient(to top right, var(--secondary), var(--primary)); }
+   .separator-line { width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); margin: 20px auto; opacity: 0.7; }
 
-   .separator-line { width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); margin: 20px auto 10px auto; border-radius: 2px; opacity: 0.7; }
+   .satanic{ display: block; text-decoration: none; width: 70%; margin: 10px auto 20px auto; background: linear-gradient(to top right, var(--primary), var(--secondary)); padding: 18px; border-radius: 40px; color: var(--front_color); font-weight: 800; border: 2px solid var(--front_color); }
+   .satanic:hover{ transform: scale(1.05); box-shadow: 0 0 20px var(--secondary); }
 
-   @media (max-width: 600px) { .vcard { width: 95%; max-height: 95vh; height: auto; } }
+   @media (max-width: 600px) { .vcard { width: 92%; } }
   </style>
  </head>
  <body>
 
   <audio id="myAudio" loop>
     <source src="misu.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
   </audio>
 
   <div class="vcard">
    <div class="header">
-    <div class="wave_bg">
-     <div class="wave-01"></div>
-     <div class="wave-02"></div>
-     <div class="wave-03"></div>
-    </div>
-    <div class="profile_pic_content">
-     <script>
-      const staticImgUrl = "https://files.catbox.moe/gmgpeo.jpg";
-      document.write(`<img class="profile_pic" src="${staticImgUrl}" alt="Profile Picture"/>`);
-     </script>
+    <div class="wave_bg"><div class="wave-01"></div><div class="wave-02"></div><div class="wave-03"></div></div>
+    <div class="profile_pic_content" id="imageToggle">
+     <img class="profile_pic" src="https://files.catbox.moe/gmgpeo.jpg" alt="Profile Picture"/>
     </div>
    </div>
    <div class="card_content">
-    <div class="satan">
-     <h4>𝑹𝑶𝑯𝑨 - ✦</h4>
-    </div>
-    <div class="snuff">
-     <h5 class="typed_text"><i>HELLO WORLD</i></h5>
-    </div>
+    <div class="satan"><h4>𝑹𝑶𝑯𝑨 - ✦</h4></div>
+    <div class="snuff"><h5 class="typed_text"></h5></div>
     <div class="social">
-     <a href="https://t.me/Roha_us" aria-label="Telegram Account"><i aria-hidden="true" class="fa fa-telegram"></i></a>
+     <a href="https://t.me/Roha_us"><i class="fa fa-telegram"></i></a>
     </div>
-
     <div class="separator-line"></div>
-    
     <a class="satanic" href="https://t.me/roha_info"><i class="fa fa-heart"></i> JOIN CHANNEL</a>
    </div>
   </div>
 
   <script>
-   // كود الكتابة المتحركة
-   var options = {
-    strings: [
-      "<b></b>",
-      "𝐼 𝐴𝑀 𝑅𝑂𝑯𝑨, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "
-    ],
-    typeSpeed: 10, 
-    backSpeed: 0, 
-    loop: false 
-   }
-   var typed = new Typed(".typed_text", options);
-
-   // كود تشغيل الموسيقى
-   const audio = document.getElementById("myAudio");
-
-   // محاولة التشغيل التلقائي عند التحميل
-   window.addEventListener('load', () => {
-       audio.play().catch(() => {
-           console.log("Autoplay prevented. Waiting for user interaction...");
-       });
+   var typed = new Typed(".typed_text", {
+    strings: ["𝐼 𝐴𝑀 𝑅𝑂𝑯𝑨, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "],
+    typeSpeed: 30, loop: false 
    });
 
-   // التشغيل فور قيام المستخدم بلمس أو الضغط على أي مكان في الصفحة
-   document.addEventListener('click', () => {
-       audio.play();
-   }, { once: true }); // true لضمان تنفيذ هذا الكود مرة واحدة فقط عند أول ضغطة
+   const audio = document.getElementById("myAudio");
+   const imageToggle = document.getElementById("imageToggle");
 
-   document.addEventListener('touchstart', () => {
-       audio.play();
-   }, { once: true });
+   // تشغيل/إيقاف الصوت عند الضغط على الصورة مع تفعيل التموجات
+   imageToggle.addEventListener('click', () => {
+       if (audio.paused) {
+           audio.play();
+           imageToggle.classList.add('playing');
+       } else {
+           audio.pause();
+           imageToggle.classList.remove('playing');
+       }
+   });
+
+   // إيقاف الصوت تلقائياً عند مغادرة المتصفح أو تغيير التبويب
+   document.addEventListener("visibilitychange", () => {
+       if (document.hidden) {
+           audio.pause();
+           imageToggle.classList.remove('playing');
+       }
+   });
   </script>
  </body>
 </html>
