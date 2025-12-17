@@ -34,25 +34,29 @@
     background: var(--back_color);
     width: 100vw; min-height: 100vh; 
     display: flex; justify-content: center; align-items: flex-start; 
-    padding-top: 30px; padding-bottom: 30px; overflow-x: hidden;
+    padding: 20px; overflow-x: hidden;
    }
 
+   /* تعديل العرض ليناسب الشاشة */
    .vcard{
-    width: 480px; max-height: 90vh; 
+    width: 100%; 
+    max-width: 400px; /* جعل العرض ملموم وأكثر تناسقاً */
     background: var(--front_color);
-    border-radius: 25px; box-shadow: 0 0 20px rgba(0,0,0,1); 
-    overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.05); 
+    border-radius: 25px; 
+    box-shadow: 0 0 20px rgba(0,0,0,1); 
+    overflow: hidden; 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
     position: relative; z-index: 10;
    }
 
-   .header{ height: 220px; position: relative; z-index: 5; }
+   .header{ height: 180px; position: relative; z-index: 5; }
    .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: visible; }
 
-   /* الأمواج الوردية المحسنة حول الصورة */
+   /* الأمواج الوردية */
    .wave-01, .wave-02, .wave-03{ 
-    position: absolute; width: 600px; height: 600px; 
+    position: absolute; width: 500px; height: 500px; 
     background: linear-gradient(to top right, var(--primary), var(--secondary)); 
-    border-radius: 43%; top: -110%; left: 50%; 
+    border-radius: 43%; top: -120%; left: 50%; 
     transform: translateX(-50%);
     animation: rotate 15s linear infinite; 
     z-index: 1; opacity: 0.6;
@@ -61,15 +65,14 @@
    .wave-03{ opacity: 0.1; animation-duration: 25s; border-radius: 45%; }
 
    .profile_pic_content{ 
-    width: 170px; height: 170px; border-radius: 50%; 
-    position: absolute; left: 50%; top: 75%;
+    width: 150px; height: 150px; border-radius: 50%; 
+    position: absolute; left: 50%; top: 80%;
     transform: translate(-50%, -50%); 
-    outline: 10px solid var(--front_color); 
+    outline: 8px solid var(--front_color); 
     cursor: pointer; z-index: 50; 
     box-shadow: 0 0 30px rgba(0,0,0,0.8);
    }
 
-   /* تأثير النيون للبطاقة */
    .profile_pic_content.playing {
     box-shadow: 0 0 20px var(--red_neon);
     border: 1px solid var(--red_neon);
@@ -88,30 +91,30 @@
    .profile_pic{ width: 100%; height: 100%; border-radius: 100%; display: block; position: relative; z-index: 100; object-fit: cover; }
 
    /* نيون الكتابة */
-   .card_content{ position: relative; text-align: center; padding: 60px 40px 20px 40px; z-index: 5; }
+   .card_content{ position: relative; text-align: center; padding: 50px 25px 20px 25px; z-index: 5; }
    
    .satan{ 
-    color: var(--red_neon); font-weight: 700; font-size: 2em; 
+    color: var(--red_neon); font-weight: 700; font-size: 1.8em; 
     text-shadow: 0 0 10px var(--red_neon), 0 0 20px var(--red_neon); 
-    margin-top: 40px; 
+    margin-top: 30px; 
    }
    
    .snuff{ 
-    margin-top: 15px; color: var(--pink_neon); min-height: 110px; 
+    margin-top: 15px; color: var(--pink_neon); min-height: 100px; 
     text-shadow: 0 0 5px var(--pink_neon);
-    font-weight: 500;
+    font-weight: 500; font-size: 0.95em;
    }
 
-   .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; }
+   .social{ padding: 5px; margin-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; }
    .social a{ 
-    text-decoration: none; color: var(--secondary); font-size: 2.2em; margin: 0 15px; 
+    text-decoration: none; color: var(--secondary); font-size: 2em; margin: 0 12px; 
     filter: drop-shadow(0 0 8px var(--secondary));
    }
    
    .satanic{ 
-    cursor: pointer; display: block; text-decoration: none; width: 75%; 
+    cursor: pointer; display: block; text-decoration: none; width: 85%; 
     margin: 20px auto; background: linear-gradient(to right, var(--primary), var(--secondary)); 
-    padding: 18px; border-radius: 40px; color: #fff; font-weight: 800;
+    padding: 15px; border-radius: 40px; color: #fff; font-weight: 800;
     box-shadow: 0 0 15px var(--secondary); border: none;
     text-shadow: 0 0 5px #fff;
    }
@@ -119,11 +122,9 @@
    .separator-line { 
     width: 70%; height: 2px; 
     background: linear-gradient(to right, transparent, var(--secondary), transparent); 
-    margin: 20px auto; opacity: 0.8; 
+    margin: 15px auto; opacity: 0.8; 
     box-shadow: 0 0 10px var(--secondary);
    }
-
-   @media (max-width: 600px) { .vcard { width: 95%; height: auto; } }
   </style>
  </head>
  <body>
@@ -152,7 +153,7 @@
   <script>
    var typed = new Typed(".typed_text", {
     strings: ["𝐼 𝐴𝑀 𝑅𝑂𝐻𝐴, 𝐼 𝐿𝑂𝑆Ｔ ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "],
-    typeSpeed: 20, loop: false 
+    typeSpeed: 25, loop: false 
    });
 
    const audio = document.getElementById("myAudio");
