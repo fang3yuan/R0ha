@@ -18,17 +18,10 @@
     --front_color: #2C2C2E; 
     --primary: #8A7B9B; 
     --secondary: #D3A9B2; 
-    --text_color: #F0F0F0; 
-    --muted_text: #C0C0C0; 
     --red_neon: #FF0000;
-    --shadow-soft: 0 10px 30px rgba(0,0,0,0.6); 
-    --soft-glow: 0 0 15px rgba(138, 123, 155, 0.3);
    }
 
-   /* أنيميشن الدوران للأمواج الخلفية */
    @keyframes rotate{ 100%{ transform: rotate(360deg); } }
-   
-   /* أنيميشن نبض الإيقاع حول الصورة */
    @keyframes beat-pulse {
     0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
     100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
@@ -46,60 +39,54 @@
    .vcard{
     width: 480px; max-height: 90vh; 
     background: var(--front_color);
-    border-radius: 25px; box-shadow: var(--shadow-soft), var(--soft-glow); 
+    border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
     overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.1); 
     position: relative; z-index: 10;
    }
 
-   .header{ height: 200px; position: relative; }
-   .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: hidden; }
+   .header{ height: 200px; position: relative; z-index: 5; }
+   .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: visible; } /* تم تعديل overflow ليظهر التموج */
 
-   /* الأمواج الوردية الخلفية (تعمل بشكل دائم) */
+   /* الأمواج الوردية الخلفية - تم تعديل التموضع لتظهر حول حافة الصورة */
    .wave-01, .wave-02, .wave-03{ 
     position: absolute; width: 650px; height: 650px; 
     background: linear-gradient(to top right, var(--primary), var(--secondary)); 
-    border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; 
+    border-radius: 45%; top: -140%; left: 50%; 
+    transform: translateX(-50%);
+    animation: rotate 20s linear infinite; 
+    z-index: 1;
    }
-   .wave-02{ opacity: 0.4; animation-duration: 30s; animation-direction: reverse; border-radius: 40%; top: -160%; left: -22%; }
-   .wave-03{ opacity: 0.15; animation-duration: 40s; border-radius: 45%; top: -140%; left: -18%; }
+   .wave-02{ opacity: 0.4; animation-duration: 25s; animation-direction: reverse; border-radius: 40%; top: -145%; }
+   .wave-03{ opacity: 0.2; animation-duration: 35s; border-radius: 42%; top: -135%; }
 
-   /* حاوية الصورة الشخصية */
    .profile_pic_content{ 
     width: 170px; height: 170px; border-radius: 50%; 
     position: absolute; left: 50%; top: 85%;
     transform: translate(-50%, -50%); 
     outline: 10px solid var(--front_color); 
-    cursor: pointer; z-index: 20;
+    cursor: pointer; z-index: 50; /* أعلى من الأمواج */
     box-shadow: 0 0 20px rgba(0,0,0,0.9);
    }
 
-   /* تأثير النيون العادي حول الصورة عند التشغيل */
-   .profile_pic_content.playing {
-    box-shadow: 0 0 20px var(--red_neon);
-    border: 1px solid var(--red_neon);
-   }
-
-   /* تموجات الإيقاع النبضية (تظهر فقط عند التشغيل) */
+   /* نبض الإيقاع الأحمر */
    .beat-ripple {
     position: absolute; top: 50%; left: 50%;
     width: 100%; height: 100%;
     background: var(--red_neon); border-radius: 50%;
     z-index: -1; display: none; pointer-events: none;
    }
-
    .profile_pic_content.playing .beat-ripple {
     display: block; animation: beat-pulse 1.5s ease-out infinite;
    }
    .beat-ripple:nth-child(2) { animation-delay: 0.5s; }
-   .beat-ripple:nth-child(3) { animation-delay: 1s; }
 
-   .profile_pic{ width: 100%; height: 100%; border-radius: 100%; display: block; position: relative; z-index: 5; object-fit: cover; }
+   .profile_pic{ width: 100%; height: 100%; border-radius: 100%; display: block; position: relative; z-index: 100; object-fit: cover; }
 
-   .card_content{ position: relative; top: 0; text-align: center; padding: 70px 40px 20px 40px; }
+   .card_content{ position: relative; text-align: center; padding: 70px 40px 20px 40px; z-index: 5; }
    .satan{ color: #FF0000; font-weight: 700; font-size: 1.8em; text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); margin-top: 40px; }
    .snuff{ margin-top: 15px; color: var(--muted_text); min-height: 110px; }
 
-   .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; padding-bottom: 5px; }
+   .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; }
    .social a{ text-decoration: none; color: var(--secondary); font-size: 2em; margin: 0 15px; }
    
    .satanic{ 
@@ -111,14 +98,12 @@
 
    .separator-line { width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); margin: 20px auto 10px auto; opacity: 0.7; }
 
-   @media (max-width: 600px) { .vcard { width: 95%; max-height: 95vh; height: auto; } }
+   @media (max-width: 600px) { .vcard { width: 95%; height: auto; } }
   </style>
  </head>
  <body>
 
-  <audio id="myAudio" loop>
-    <source src="misu.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="myAudio" loop><source src="misu.mp3" type="audio/mpeg"></audio>
 
   <div class="vcard">
    <div class="header">
@@ -126,18 +111,14 @@
      <div class="wave-01"></div><div class="wave-02"></div><div class="wave-03"></div>
     </div>
     <div class="profile_pic_content" id="masterToggle">
-     <div class="beat-ripple"></div>
-     <div class="beat-ripple"></div>
-     <div class="beat-ripple"></div>
+     <div class="beat-ripple"></div><div class="beat-ripple"></div>
      <img class="profile_pic" src="https://files.catbox.moe/gmgpeo.jpg" alt="Profile Picture"/>
     </div>
    </div>
    <div class="card_content">
     <div class="satan"><h4>𝑹𝑶𝑯𝑨 - ✦</h4></div>
     <div class="snuff"><h5 class="typed_text"></h5></div>
-    <div class="social">
-     <a href="https://t.me/Roha_us"><i class="fa fa-telegram"></i></a>
-    </div>
+    <div class="social"><a href="https://t.me/Roha_us"><i class="fa fa-telegram"></i></a></div>
     <div class="separator-line"></div>
     <a class="satanic" href="https://t.me/roha_info"><i class="fa fa-heart"></i> JOIN CHANNEL</a>
    </div>
@@ -153,20 +134,12 @@
    const toggleBtn = document.getElementById("masterToggle");
 
    toggleBtn.addEventListener('click', () => {
-       if (audio.paused) {
-           audio.play();
-           toggleBtn.classList.add('playing');
-       } else {
-           audio.pause();
-           toggleBtn.classList.remove('playing');
-       }
+       if (audio.paused) { audio.play(); toggleBtn.classList.add('playing'); }
+       else { audio.pause(); toggleBtn.classList.remove('playing'); }
    });
 
    document.addEventListener("visibilitychange", () => {
-       if (document.hidden) {
-           audio.pause();
-           toggleBtn.classList.remove('playing');
-       }
+       if (document.hidden) { audio.pause(); toggleBtn.classList.remove('playing'); }
    });
   </script>
  </body>
