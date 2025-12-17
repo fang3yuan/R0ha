@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
   
-  <title>Moody Pastel VCard</title>
+  <title>Moody Neon VCard</title>
   
   <style>
    :root{
@@ -19,12 +19,13 @@
     --primary: #8A7B9B; 
     --secondary: #D3A9B2; 
     --red_neon: #FF0000;
+    --pink_neon: #D3A9B2;
    }
 
    @keyframes rotate{ 100%{ transform: rotate(360deg); } }
    @keyframes beat-pulse {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
-    100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(1.7); opacity: 0; }
    }
 
    *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s ease-in-out; }
@@ -39,36 +40,41 @@
    .vcard{
     width: 480px; max-height: 90vh; 
     background: var(--front_color);
-    border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
-    overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 25px; box-shadow: 0 0 20px rgba(0,0,0,1); 
+    overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.05); 
     position: relative; z-index: 10;
    }
 
-   .header{ height: 200px; position: relative; z-index: 5; }
-   .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: visible; } /* تم تعديل overflow ليظهر التموج */
+   .header{ height: 220px; position: relative; z-index: 5; }
+   .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: visible; }
 
-   /* الأمواج الوردية الخلفية - تم تعديل التموضع لتظهر حول حافة الصورة */
+   /* الأمواج الوردية المحسنة حول الصورة */
    .wave-01, .wave-02, .wave-03{ 
-    position: absolute; width: 650px; height: 650px; 
+    position: absolute; width: 600px; height: 600px; 
     background: linear-gradient(to top right, var(--primary), var(--secondary)); 
-    border-radius: 45%; top: -140%; left: 50%; 
+    border-radius: 43%; top: -110%; left: 50%; 
     transform: translateX(-50%);
-    animation: rotate 20s linear infinite; 
-    z-index: 1;
+    animation: rotate 15s linear infinite; 
+    z-index: 1; opacity: 0.6;
    }
-   .wave-02{ opacity: 0.4; animation-duration: 25s; animation-direction: reverse; border-radius: 40%; top: -145%; }
-   .wave-03{ opacity: 0.2; animation-duration: 35s; border-radius: 42%; top: -135%; }
+   .wave-02{ opacity: 0.3; animation-duration: 20s; animation-direction: reverse; border-radius: 38%; }
+   .wave-03{ opacity: 0.1; animation-duration: 25s; border-radius: 45%; }
 
    .profile_pic_content{ 
     width: 170px; height: 170px; border-radius: 50%; 
-    position: absolute; left: 50%; top: 85%;
+    position: absolute; left: 50%; top: 75%;
     transform: translate(-50%, -50%); 
     outline: 10px solid var(--front_color); 
-    cursor: pointer; z-index: 50; /* أعلى من الأمواج */
-    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    cursor: pointer; z-index: 50; 
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
    }
 
-   /* نبض الإيقاع الأحمر */
+   /* تأثير النيون للبطاقة */
+   .profile_pic_content.playing {
+    box-shadow: 0 0 20px var(--red_neon);
+    border: 1px solid var(--red_neon);
+   }
+
    .beat-ripple {
     position: absolute; top: 50%; left: 50%;
     width: 100%; height: 100%;
@@ -76,27 +82,46 @@
     z-index: -1; display: none; pointer-events: none;
    }
    .profile_pic_content.playing .beat-ripple {
-    display: block; animation: beat-pulse 1.5s ease-out infinite;
+    display: block; animation: beat-pulse 1.2s ease-out infinite;
    }
-   .beat-ripple:nth-child(2) { animation-delay: 0.5s; }
 
    .profile_pic{ width: 100%; height: 100%; border-radius: 100%; display: block; position: relative; z-index: 100; object-fit: cover; }
 
-   .card_content{ position: relative; text-align: center; padding: 70px 40px 20px 40px; z-index: 5; }
-   .satan{ color: #FF0000; font-weight: 700; font-size: 1.8em; text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); margin-top: 40px; }
-   .snuff{ margin-top: 15px; color: var(--muted_text); min-height: 110px; }
-
-   .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; }
-   .social a{ text-decoration: none; color: var(--secondary); font-size: 2em; margin: 0 15px; }
+   /* نيون الكتابة */
+   .card_content{ position: relative; text-align: center; padding: 60px 40px 20px 40px; z-index: 5; }
    
-   .satanic{ 
-    cursor: pointer; display: block; text-decoration: none; width: 70%; 
-    margin: 15px auto 20px auto; background: linear-gradient(to top right, var(--primary), var(--secondary)); 
-    padding: 18px 30px; border-radius: 40px; color: var(--front_color); font-weight: 800;
-    box-shadow: 0px 5px 20px rgba(0,0,0,0.4); border: 2px solid var(--front_color);
+   .satan{ 
+    color: var(--red_neon); font-weight: 700; font-size: 2em; 
+    text-shadow: 0 0 10px var(--red_neon), 0 0 20px var(--red_neon); 
+    margin-top: 40px; 
+   }
+   
+   .snuff{ 
+    margin-top: 15px; color: var(--pink_neon); min-height: 110px; 
+    text-shadow: 0 0 5px var(--pink_neon);
+    font-weight: 500;
    }
 
-   .separator-line { width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); margin: 20px auto 10px auto; opacity: 0.7; }
+   .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; }
+   .social a{ 
+    text-decoration: none; color: var(--secondary); font-size: 2.2em; margin: 0 15px; 
+    filter: drop-shadow(0 0 8px var(--secondary));
+   }
+   
+   .satanic{ 
+    cursor: pointer; display: block; text-decoration: none; width: 75%; 
+    margin: 20px auto; background: linear-gradient(to right, var(--primary), var(--secondary)); 
+    padding: 18px; border-radius: 40px; color: #fff; font-weight: 800;
+    box-shadow: 0 0 15px var(--secondary); border: none;
+    text-shadow: 0 0 5px #fff;
+   }
+
+   .separator-line { 
+    width: 70%; height: 2px; 
+    background: linear-gradient(to right, transparent, var(--secondary), transparent); 
+    margin: 20px auto; opacity: 0.8; 
+    box-shadow: 0 0 10px var(--secondary);
+   }
 
    @media (max-width: 600px) { .vcard { width: 95%; height: auto; } }
   </style>
@@ -127,7 +152,7 @@
   <script>
    var typed = new Typed(".typed_text", {
     strings: ["𝐼 𝐴𝑀 𝑅𝑂𝐻𝐴, 𝐼 𝐿𝑂𝑆Ｔ ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "],
-    typeSpeed: 10, loop: false 
+    typeSpeed: 20, loop: false 
    });
 
    const audio = document.getElementById("myAudio");
