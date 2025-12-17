@@ -6,11 +6,12 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta name="theme-color" content="#8A7B9B"/>
   <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="@Ob_i9" name="description"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
   
-  <title>ROHA - Official VCard</title>
+  <title>Moody Pastel VCard</title>
   
   <style>
    :root{
@@ -21,39 +22,39 @@
     --text_color: #F0F0F0; 
     --muted_text: #C0C0C0; 
     --red_neon: #FF0000;
+    --shadow-soft: 0 10px 30px rgba(0,0,0,0.6); 
+    --soft-glow: 0 0 15px rgba(138, 123, 155, 0.3);
    }
 
-   /* إطارات الحركة */
    @keyframes rotate{ 100%{ transform: rotate(360deg); } }
    @keyframes pulse-soft { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
    
-   /* أنيميشن تموجات الإيقاع (النبض) */
+   /* أنيميشن تموجات الإيقاع */
    @keyframes rippleEffect {
     0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
     100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
    }
 
-   *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease-in-out; }
+   *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s ease-in-out; }
 
    body{
     background: var(--back_color);
     width: 100vw;
     min-height: 100vh; 
+    overflow-y: auto; 
     display: flex;
     justify-content: center;
     align-items: flex-start; 
-    padding-top: 50px; 
+    padding-top: 30px; 
     padding-bottom: 30px; 
-    overflow-x: hidden;
    }
 
-   /* أبعاد البطاقة المعدلة (قصر الطول) */
    .vcard{
     width: 480px; 
     max-height: 90vh; 
     background: var(--front_color);
     border-radius: 25px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+    box-shadow: var(--shadow-soft), var(--soft-glow); 
     overflow-y: auto; 
     border: 1px solid rgba(255, 255, 255, 0.1); 
     animation: pulse-soft 6s infinite ease-in-out;
@@ -61,34 +62,31 @@
     z-index: 10;
    }
 
-   .header{ height: 180px; position: relative; }
+   .header{ height: 40%; position: relative; }
    .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: hidden; }
 
-   .wave-01, .wave-02{ position: absolute; width: 650px; height: 650px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; }
+   .wave-01, .wave-02, .wave-03{ position: absolute; width: 650px; height: 650px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; }
    .wave-02{ opacity: 0.4; animation-duration: 30s; animation-direction: reverse; }
+   .wave-03{ opacity: 0.15; animation-duration: 40s; }
 
    /* حاوية الصورة مع التموجات والنيون */
    .profile_pic_content{ 
-    width: 170px; 
-    height: 170px; 
+    width: 170px; height: 170px; 
     border-radius: 50%; 
-    position: absolute; 
-    left: 50%; 
+    position: absolute; left: 50%; top: 85%;
     transform: translate(-50%, -50%); 
-    top: 85%; 
     outline: 10px solid var(--front_color); 
-    cursor: pointer;
-    z-index: 20;
+    cursor: pointer; z-index: 20;
     transition: box-shadow 0.4s ease, border 0.4s ease;
    }
 
-   /* حالة تشغيل النيون الأحمر */
+   /* حالة تشغيل النيون عند الضغط */
    .profile_pic_content.playing {
     box-shadow: 0 0 25px var(--red_neon), 0 0 50px var(--red_neon);
     border: 2px solid var(--red_neon);
    }
 
-   /* طبقات التموجات (تظهر فقط عند التشغيل) */
+   /* طبقات التموجات (تظهر عند التشغيل) */
    .ripple {
     position: absolute;
     top: 50%; left: 50%;
@@ -106,30 +104,27 @@
    .ripple:nth-child(2) { animation-delay: 0.5s; }
    .ripple:nth-child(3) { animation-delay: 1s; }
 
-   .profile_pic{ width: 100%; border-radius: 50%; display: block; position: relative; z-index: 5; }
+   .profile_pic{ max-width: 100%; max-height: 100%; border-radius: 100%; display: block; position: relative; z-index: 5; }
 
-   .card_content{ text-align: center; padding: 70px 40px 30px 40px; }
-   .satan{ color: var(--red_neon); font-weight: 700; font-size: 1.8em; text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
-   .snuff{ margin-top: 15px; color: var(--muted_text); min-height: 100px; font-size: 1.1em; }
+   .card_content{ position: relative; top: 0; text-align: center; padding: 70px 40px 20px 40px; }
 
-   .social{ margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; }
-   .social a{ color: var(--secondary); font-size: 2em; margin: 0 15px; text-decoration: none; }
+   .satan{ color: #FF0000; font-weight: 700; font-size: 1.8em; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); margin-top: 40px; }
+   .snuff{ margin-top: 15px; color: var(--muted_text); padding: 0px 10px; font-size: 1.1em; min-height: 110px; }
+
+   .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; padding-bottom: 5px; }
+   .social a{ text-decoration: none; color: var(--secondary); font-size: 2em; margin: 0 15px; }
    
-   .separator-line { 
-    width: 60%; height: 2px; 
-    background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); 
-    margin: 20px auto; opacity: 0.6; 
-   }
-
    .satanic{ 
-    display: block; text-decoration: none; width: 80%; 
-    margin: 0 auto; background: linear-gradient(to right, var(--primary), var(--secondary)); 
-    padding: 16px; border-radius: 40px; color: #fff; font-weight: 800; 
-    border: 2px solid var(--front_color);
+    cursor: pointer; display: block; text-decoration: none; width: 70%; 
+    margin: 15px auto 20px auto; background: linear-gradient(to top right, var(--primary), var(--secondary)); 
+    padding: 18px 30px; border-radius: 40px; color: var(--front_color); font-weight: 800;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.4); border: 2px solid var(--front_color);
    }
-   .satanic:hover{ transform: scale(1.05); box-shadow: 0 0 20px var(--secondary); }
+   .satanic:hover{ box-shadow: 0px 8px 30px var(--secondary); transform: scale(1.05); }
 
-   @media (max-width: 600px) { .vcard { width: 92%; height: auto; } }
+   .separator-line { width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); margin: 20px auto 10px auto; border-radius: 2px; opacity: 0.7; }
+
+   @media (max-width: 600px) { .vcard { width: 95%; max-height: 95vh; height: auto; } }
   </style>
  </head>
  <body>
@@ -140,41 +135,35 @@
 
   <div class="vcard">
    <div class="header">
-    <div class="wave_bg"><div class="wave-01"></div><div class="wave-02"></div></div>
-    
+    <div class="wave_bg">
+     <div class="wave-01"></div><div class="wave-02"></div><div class="wave-03"></div>
+    </div>
     <div class="profile_pic_content" id="masterToggle">
-     <div class="ripple"></div>
-     <div class="ripple"></div>
-     <div class="ripple"></div>
-     <img class="profile_pic" src="https://files.catbox.moe/gmgpeo.jpg" alt="Profile"/>
+     <div class="ripple"></div><div class="ripple"></div><div class="ripple"></div>
+     <img class="profile_pic" src="https://files.catbox.moe/gmgpeo.jpg" alt="Profile Picture"/>
     </div>
    </div>
-
    <div class="card_content">
     <div class="satan"><h4>𝑹𝑶𝑯𝑨 - ✦</h4></div>
-    <div class="snuff"><h5 id="typed_text"></h5></div>
-    
+    <div class="snuff"><h5 class="typed_text"></h5></div>
     <div class="social">
-     <a href="https://t.me/Roha_us"><i class="fa fa-telegram"></i></a>
+     <a href="https://t.me/Roha_us" aria-label="Telegram Account"><i aria-hidden="true" class="fa fa-telegram"></i></a>
     </div>
-
     <div class="separator-line"></div>
-    
     <a class="satanic" href="https://t.me/roha_info"><i class="fa fa-heart"></i> JOIN CHANNEL</a>
    </div>
   </div>
 
   <script>
-   // تأثير الكتابة
-   var typed = new Typed("#typed_text", {
-    strings: ["𝐼 𝐴𝑀 𝑅𝑂𝑯𝑨, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram : @roha_info<br>User : @Roha_us"],
-    typeSpeed: 40, showCursor: false
+   var typed = new Typed(".typed_text", {
+    strings: ["𝐼 𝐴𝑀 𝑅𝑂𝐻𝐴, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "],
+    typeSpeed: 10, backSpeed: 0, loop: false 
    });
 
    const audio = document.getElementById("myAudio");
    const toggleBtn = document.getElementById("masterToggle");
 
-   // تشغيل وإيقاف كل شيء بضغطة واحدة
+   // تشغيل وإيقاف الصوت والنيون بضغطة واحدة
    toggleBtn.addEventListener('click', () => {
        if (audio.paused) {
            audio.play();
@@ -185,7 +174,7 @@
        }
    });
 
-   // إيقاف تلقائي عند الخروج من المتصفح أو تغيير التبويب
+   // إيقاف عند مغادرة المتصفح
    document.addEventListener("visibilitychange", () => {
        if (document.hidden) {
            audio.pause();
