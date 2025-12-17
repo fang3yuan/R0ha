@@ -6,7 +6,6 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta name="theme-color" content="#8A7B9B"/>
   <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <meta content="@Ob_i9" name="description"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
@@ -15,9 +14,6 @@
   <title>Moody Pastel VCard</title>
   
   <style>
-   /* ----------------------------------- */
-   /* الألوان (الرمادي العميق والوردي الباهت) */
-   /* ----------------------------------- */
    :root{
     --back_color: #1A1A1A; 
     --front_color: #2C2C2E; 
@@ -29,25 +25,10 @@
     --soft-glow: 0 0 15px rgba(138, 123, 155, 0.3);
    }
 
-   /* ----------------------------------- */
-   /* إطارات الحركة */
-   /* ----------------------------------- */
-   @keyframes rotate{
-    100%{ transform: rotate(360deg); }
-   }
-   @keyframes pulse-soft {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.01); }
-    100% { transform: scale(1); }
-   }
+   @keyframes rotate{ 100%{ transform: rotate(360deg); } }
+   @keyframes pulse-soft { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
 
-   *{
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: all 0.5s ease-in-out; 
-   }
+   *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s ease-in-out; }
 
    body{
     background: var(--back_color);
@@ -70,191 +51,47 @@
     overflow-y: auto; 
     border: 1px solid rgba(255, 255, 255, 0.1); 
     animation: pulse-soft 6s infinite ease-in-out;
-    position: relative; /* تم الإبقاء عليه لمرونة التصميم الداخلي */
-   }
-   .vcard:hover{
-     transform: scale(1.02) translateY(-5px); 
-     box-shadow: 0 15px 45px rgba(0,0,0,0.8), 0 0 25px var(--secondary);
-   }
-
-   .header{
-    height: 40%;
     position: relative;
    }
+   .vcard:hover{ transform: scale(1.02) translateY(-5px); box-shadow: 0 15px 45px rgba(0,0,0,0.8), 0 0 25px var(--secondary); }
 
-   .wave_bg{
-    border-radius: 25px 25px 0 0; 
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-   }
+   .header{ height: 40%; position: relative; }
+   .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: hidden; }
 
-   /* الأمواج المتحركة (Waves) */
-   .wave-01{
-    position: absolute;
-    width: 650px; 
-    height: 650px;
-    background: linear-gradient(to top right, var(--primary), var(--secondary));
-    border-radius: 50%;
-    top: -150%; 
-    left: -20%;
-    animation: rotate 20s linear infinite; 
-   }
-   .wave-02{
-    position: absolute;
-    width: 680px; 
-    height: 680px;
-    background: linear-gradient(to top right, var(--primary), var(--secondary));
-    border-radius: 40%;
-    top: -160%; 
-    left: -22%;
-    opacity: 0.4;
-    animation: rotate 30s linear infinite reverse; 
-   }
-   .wave-03{
-    position: absolute;
-    width: 620px; 
-    height: 620px;
-    background: linear-gradient(to top right, var(--primary), var(--secondary));
-    border-radius: 45%;
-    top: -140%; 
-    left: -18%;
-    opacity: 0.15;
-    animation: rotate 40s linear infinite;
-   }
+   .wave-01{ position: absolute; width: 650px; height: 650px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; }
+   .wave-02{ position: absolute; width: 680px; height: 680px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 40%; top: -160%; left: -22%; opacity: 0.4; animation: rotate 30s linear infinite reverse; }
+   .wave-03{ position: absolute; width: 620px; height: 620px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 45%; top: -140%; left: -18%; opacity: 0.15; animation: rotate 40s linear infinite; }
 
-   .profile_pic_content{
-    width: 170px; 
-    height: 170px;
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    top: 85%;
-    outline: 10px solid var(--front_color); 
-    outline-offset: 1px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.9);
-   }
-   /* توهج نيون أحمر */
-   .profile_pic_content::after{
-    content: '';
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, #FF0000, #A00000); 
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    opacity: 0;
-   }
-   .profile_pic_content:hover::after{
-    opacity: 0.8; 
-    box-shadow: 0 0 40px #FF0000; 
-    transform: scale(1.05); 
-   }
+   .profile_pic_content{ width: 170px; height: 170px; border-radius: 50%; position: absolute; left: 50%; transform: translate(-50%, -50%); top: 85%; outline: 10px solid var(--front_color); outline-offset: 1px; box-shadow: 0 0 20px rgba(0,0,0,0.9); }
+   .profile_pic_content::after{ content: ''; border-radius: 50%; width: 100%; height: 100%; background: linear-gradient(to right, #FF0000, #A00000); position: absolute; top: 0; left: 0; z-index: -1; opacity: 0; }
+   .profile_pic_content:hover::after{ opacity: 0.8; box-shadow: 0 0 40px #FF0000; transform: scale(1.05); }
 
-   .profile_pic{
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 100%;
-    display: block;
-   }
+   .profile_pic{ max-width: 100%; max-height: 100%; border-radius: 100%; display: block; }
 
-   .card_content{
-    position: relative;
-    top: 0; 
-    text-align: center;
-    padding: 0 40px;
-   }
+   .card_content{ position: relative; top: 0; text-align: center; padding: 0 40px; }
 
-   /* الاسم أسفل الصورة */
-   .satan{
-    color: #FF0000; 
-    font-weight: 700; 
-    font-size: 1.8em; 
-    letter-spacing: 1px;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); 
-    margin-top: 40px; 
-   }
-   /* **التعديل الهام: تم زيادة min-height إلى 110px لتثبيت الخط الفاصل** */
-   .snuff{
-    margin-top: 15px;
-    color: var(--muted_text);
-    padding: 0px 10px;
-    font-size: 1.1em;
-    min-height: 110px; 
-   }
+   .satan{ color: #FF0000; font-weight: 700; font-size: 1.8em; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); margin-top: 40px; }
+   .snuff{ margin-top: 15px; color: var(--muted_text); padding: 0px 10px; font-size: 1.1em; min-height: 110px; }
 
-   .typed_text{
-    text-align: center;
-   }
-
-   .social{
-    padding: 5px;
-    margin-top: 20px; 
-    /* هذا الخط الأصلي (بين النص والأيقونات) */
-    border-top: 1px solid rgba(255, 255, 255, 0.1); 
-    padding-top: 25px; 
-    padding-bottom: 5px; /* تقليل المسافة من الأسفل للاقتراب من الفاصل */
-   }
-   .social a{
-    text-decoration: none;
-    color: var(--secondary); 
-    font-size: 2em; 
-    margin: 0 15px;
-   }
-   .social a:hover{
-    color: var(--primary);
-    transform: translateY(-5px); 
-    filter: brightness(1.2);
-   }
+   .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; padding-bottom: 5px; }
+   .social a{ text-decoration: none; color: var(--secondary); font-size: 2em; margin: 0 15px; }
+   .social a:hover{ color: var(--primary); transform: translateY(-5px); filter: brightness(1.2); }
    
-   .satanic{ 
-    cursor: pointer;
-    display: block;
-    text-decoration: none;
-    width: 70%; 
-    margin-top: 15px; /* تقليل المسافة بعد الخط الفاصل */
-    margin-left: 15%;
-    background: linear-gradient(to top right, var(--primary), var(--secondary)); 
-    padding: 18px 30px; 
-    border-radius: 40px; 
-    color: var(--front_color); 
-    font-weight: 800;
-    letter-spacing: 2px;
-    box-shadow: 0px 5px 20px rgba(0,0,0,0.4); 
-    border: 2px solid var(--front_color);
-    margin-bottom: 20px; 
-   }
-   .satanic:hover{
-    box-shadow: 0px 8px 30px var(--secondary); 
-    transform: translateY(-2px) scale(1.05);
-    background: linear-gradient(to top right, var(--secondary), var(--primary)); 
-   }
+   .satanic{ cursor: pointer; display: block; text-decoration: none; width: 70%; margin-top: 15px; margin-left: 15%; background: linear-gradient(to top right, var(--primary), var(--secondary)); padding: 18px 30px; border-radius: 40px; color: var(--front_color); font-weight: 800; letter-spacing: 2px; box-shadow: 0px 5px 20px rgba(0,0,0,0.4); border: 2px solid var(--front_color); margin-bottom: 20px; }
+   .satanic:hover{ box-shadow: 0px 8px 30px var(--secondary); transform: translateY(-2px) scale(1.05); background: linear-gradient(to top right, var(--secondary), var(--primary)); }
 
-   /* تعريف الستايل للخط الفاصل الجديد */
-   .separator-line {
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent);
-    margin: 20px auto 10px auto; /* المسافة بين الأيقونات والزر */
-    border-radius: 2px;
-    opacity: 0.7;
-   }
+   .separator-line { width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); margin: 20px auto 10px auto; border-radius: 2px; opacity: 0.7; }
 
-   /* تم حذف أنماط #websites-btn و #websites-list */
-
-   @media (max-width: 600px) {
-    .vcard {
-        width: 95%; 
-        max-height: 95vh; 
-        height: auto; 
-    }
-   }
+   @media (max-width: 600px) { .vcard { width: 95%; max-height: 95vh; height: auto; } }
   </style>
  </head>
  <body>
+
+  <audio id="myAudio" loop>
+    <source src="misu.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <div class="vcard">
    <div class="header">
     <div class="wave_bg">
@@ -264,7 +101,6 @@
     </div>
     <div class="profile_pic_content">
      <script>
-      // تحديث رابط الصورة:
       const staticImgUrl = "https://files.catbox.moe/gmgpeo.jpg";
       document.write(`<img class="profile_pic" src="${staticImgUrl}" alt="Profile Picture"/>`);
      </script>
@@ -288,11 +124,11 @@
   </div>
 
   <script>
-   // تحديث الجملة المتحركة
+   // كود الكتابة المتحركة
    var options = {
     strings: [
       "<b></b>",
-      "𝐼 𝐴𝑀 𝑅𝑂𝐻𝐴, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "
+      "𝐼 𝐴𝑀 𝑅𝑂𝑯𝑨, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "
     ],
     typeSpeed: 10, 
     backSpeed: 0, 
@@ -300,7 +136,24 @@
    }
    var typed = new Typed(".typed_text", options);
 
-   /* تم إزالة كود الجافاسكريبت الخاص بـ websites-btn و websites-list */
+   // كود تشغيل الموسيقى
+   const audio = document.getElementById("myAudio");
+
+   // محاولة التشغيل التلقائي عند التحميل
+   window.addEventListener('load', () => {
+       audio.play().catch(() => {
+           console.log("Autoplay prevented. Waiting for user interaction...");
+       });
+   });
+
+   // التشغيل فور قيام المستخدم بلمس أو الضغط على أي مكان في الصفحة
+   document.addEventListener('click', () => {
+       audio.play();
+   }, { once: true }); // true لضمان تنفيذ هذا الكود مرة واحدة فقط عند أول ضغطة
+
+   document.addEventListener('touchstart', () => {
+       audio.play();
+   }, { once: true });
   </script>
  </body>
 </html>
