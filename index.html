@@ -29,10 +29,10 @@
    @keyframes rotate{ 100%{ transform: rotate(360deg); } }
    @keyframes pulse-soft { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
    
-   /* أنيميشن تموجات الإيقاع */
+   /* أنيميشن تموجات الإيقاع بتأثير نيون */
    @keyframes rippleEffect {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-    100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; box-shadow: 0 0 10px var(--red_neon); }
+    100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; box-shadow: 0 0 40px var(--red_neon); }
    }
 
    *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s ease-in-out; }
@@ -62,7 +62,7 @@
     z-index: 10;
    }
 
-   .header{ height: 40%; position: relative; }
+   .header{ height: 200px; position: relative; }
    .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: hidden; }
 
    .wave-01, .wave-02, .wave-03{ position: absolute; width: 650px; height: 650px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; }
@@ -77,7 +77,7 @@
     transform: translate(-50%, -50%); 
     outline: 10px solid var(--front_color); 
     cursor: pointer; z-index: 20;
-    transition: box-shadow 0.4s ease, border 0.4s ease;
+    transition: all 0.4s ease;
    }
 
    /* حالة تشغيل النيون عند الضغط */
@@ -86,7 +86,7 @@
     border: 2px solid var(--red_neon);
    }
 
-   /* طبقات التموجات (تظهر عند التشغيل) */
+   /* طبقات التموجات النيون (تظهر عند التشغيل) */
    .ripple {
     position: absolute;
     top: 50%; left: 50%;
@@ -94,17 +94,20 @@
     background: var(--red_neon);
     border-radius: 50%;
     z-index: -1;
-    display: none;
+    display: none; /* مخفية افتراضياً */
+    pointer-events: none;
    }
 
    .profile_pic_content.playing .ripple {
     display: block;
-    animation: rippleEffect 1.5s linear infinite;
+    animation: rippleEffect 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
    }
+   
+   .ripple:nth-child(1) { animation-delay: 0s; }
    .ripple:nth-child(2) { animation-delay: 0.5s; }
    .ripple:nth-child(3) { animation-delay: 1s; }
 
-   .profile_pic{ max-width: 100%; max-height: 100%; border-radius: 100%; display: block; position: relative; z-index: 5; }
+   .profile_pic{ width: 100%; height: 100%; border-radius: 100%; display: block; position: relative; z-index: 5; object-fit: cover; }
 
    .card_content{ position: relative; top: 0; text-align: center; padding: 70px 40px 20px 40px; }
 
@@ -139,7 +142,9 @@
      <div class="wave-01"></div><div class="wave-02"></div><div class="wave-03"></div>
     </div>
     <div class="profile_pic_content" id="masterToggle">
-     <div class="ripple"></div><div class="ripple"></div><div class="ripple"></div>
+     <div class="ripple"></div>
+     <div class="ripple"></div>
+     <div class="ripple"></div>
      <img class="profile_pic" src="https://files.catbox.moe/gmgpeo.jpg" alt="Profile Picture"/>
     </div>
    </div>
@@ -163,7 +168,7 @@
    const audio = document.getElementById("myAudio");
    const toggleBtn = document.getElementById("masterToggle");
 
-   // تشغيل وإيقاف الصوت والنيون بضغطة واحدة
+   // تشغيل وإيقاف الصوت والنيون والتموجات بضغطة واحدة
    toggleBtn.addEventListener('click', () => {
        if (audio.paused) {
            audio.play();
