@@ -25,13 +25,13 @@
     --soft-glow: 0 0 15px rgba(138, 123, 155, 0.3);
    }
 
+   /* أنيميشن الدوران للأمواج الخلفية */
    @keyframes rotate{ 100%{ transform: rotate(360deg); } }
-   @keyframes pulse-soft { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
    
-   /* أنيميشن تموجات الإيقاع (نفس نمط الأمواج الوردية) */
-   @keyframes wavePulse {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-    100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+   /* أنيميشن نبض الإيقاع حول الصورة */
+   @keyframes beat-pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
    }
 
    *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s ease-in-out; }
@@ -39,9 +39,8 @@
    body{
     background: var(--back_color);
     width: 100vw; min-height: 100vh; 
-    overflow-y: auto; 
     display: flex; justify-content: center; align-items: flex-start; 
-    padding-top: 30px; padding-bottom: 30px;
+    padding-top: 30px; padding-bottom: 30px; overflow-x: hidden;
    }
 
    .vcard{
@@ -49,14 +48,13 @@
     background: var(--front_color);
     border-radius: 25px; box-shadow: var(--shadow-soft), var(--soft-glow); 
     overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.1); 
-    animation: pulse-soft 6s infinite ease-in-out;
     position: relative; z-index: 10;
    }
 
    .header{ height: 200px; position: relative; }
    .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: hidden; }
 
-   /* الأمواج الوردية الأصلية في الخلفية */
+   /* الأمواج الوردية الخلفية (تعمل بشكل دائم) */
    .wave-01, .wave-02, .wave-03{ 
     position: absolute; width: 650px; height: 650px; 
     background: linear-gradient(to top right, var(--primary), var(--secondary)); 
@@ -75,26 +73,25 @@
     box-shadow: 0 0 20px rgba(0,0,0,0.9);
    }
 
-   /* نيون بسيط حول الصورة عند العمل */
+   /* تأثير النيون العادي حول الصورة عند التشغيل */
    .profile_pic_content.playing {
-    border: 1px solid var(--secondary);
-    box-shadow: 0 0 15px var(--secondary);
+    box-shadow: 0 0 20px var(--red_neon);
+    border: 1px solid var(--red_neon);
    }
 
-   /* تموجات الإيقاع الوردية خلف الصورة (نفس ألوان wave-01) */
-   .music-wave {
+   /* تموجات الإيقاع النبضية (تظهر فقط عند التشغيل) */
+   .beat-ripple {
     position: absolute; top: 50%; left: 50%;
     width: 100%; height: 100%;
-    background: linear-gradient(to top right, var(--primary), var(--secondary));
-    border-radius: 50%;
+    background: var(--red_neon); border-radius: 50%;
     z-index: -1; display: none; pointer-events: none;
    }
 
-   .profile_pic_content.playing .music-wave {
-    display: block; animation: wavePulse 2s infinite ease-out;
+   .profile_pic_content.playing .beat-ripple {
+    display: block; animation: beat-pulse 1.5s ease-out infinite;
    }
-   .music-wave:nth-child(2) { animation-delay: 0.6s; }
-   .music-wave:nth-child(3) { animation-delay: 1.2s; }
+   .beat-ripple:nth-child(2) { animation-delay: 0.5s; }
+   .beat-ripple:nth-child(3) { animation-delay: 1s; }
 
    .profile_pic{ width: 100%; height: 100%; border-radius: 100%; display: block; position: relative; z-index: 5; object-fit: cover; }
 
@@ -129,9 +126,9 @@
      <div class="wave-01"></div><div class="wave-02"></div><div class="wave-03"></div>
     </div>
     <div class="profile_pic_content" id="masterToggle">
-     <div class="music-wave"></div>
-     <div class="music-wave"></div>
-     <div class="music-wave"></div>
+     <div class="beat-ripple"></div>
+     <div class="beat-ripple"></div>
+     <div class="beat-ripple"></div>
      <img class="profile_pic" src="https://files.catbox.moe/gmgpeo.jpg" alt="Profile Picture"/>
     </div>
    </div>
@@ -148,7 +145,7 @@
 
   <script>
    var typed = new Typed(".typed_text", {
-    strings: ["𝐼 𝐴𝑀 𝑅𝑂𝐻𝐴, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "],
+    strings: ["𝐼 𝐴𝑀 𝑅𝑂𝐻𝐴, 𝐼 𝐿𝑂𝑆Ｔ ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "],
     typeSpeed: 10, loop: false 
    });
 
