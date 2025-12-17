@@ -6,7 +6,6 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta name="theme-color" content="#8A7B9B"/>
   <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-  <meta content="@Ob_i9" name="description"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
@@ -29,90 +28,79 @@
    @keyframes rotate{ 100%{ transform: rotate(360deg); } }
    @keyframes pulse-soft { 0% { transform: scale(1); } 50% { transform: scale(1.01); } 100% { transform: scale(1); } }
    
-   /* أنيميشن تموجات الإيقاع بتأثير نيون */
-   @keyframes rippleEffect {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; box-shadow: 0 0 10px var(--red_neon); }
-    100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; box-shadow: 0 0 40px var(--red_neon); }
+   /* أنيميشن تموجات الإيقاع (نفس نمط الأمواج الوردية) */
+   @keyframes wavePulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
    }
 
    *{ font-family: 'Poppins', sans-serif; margin: 0; padding: 0; box-sizing: border-box; transition: all 0.5s ease-in-out; }
 
    body{
     background: var(--back_color);
-    width: 100vw;
-    min-height: 100vh; 
+    width: 100vw; min-height: 100vh; 
     overflow-y: auto; 
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; 
-    padding-top: 30px; 
-    padding-bottom: 30px; 
+    display: flex; justify-content: center; align-items: flex-start; 
+    padding-top: 30px; padding-bottom: 30px;
    }
 
    .vcard{
-    width: 480px; 
-    max-height: 90vh; 
+    width: 480px; max-height: 90vh; 
     background: var(--front_color);
-    border-radius: 25px; 
-    box-shadow: var(--shadow-soft), var(--soft-glow); 
-    overflow-y: auto; 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 25px; box-shadow: var(--shadow-soft), var(--soft-glow); 
+    overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.1); 
     animation: pulse-soft 6s infinite ease-in-out;
-    position: relative;
-    z-index: 10;
+    position: relative; z-index: 10;
    }
 
    .header{ height: 200px; position: relative; }
    .wave_bg{ border-radius: 25px 25px 0 0; position: relative; height: 100%; overflow: hidden; }
 
-   .wave-01, .wave-02, .wave-03{ position: absolute; width: 650px; height: 650px; background: linear-gradient(to top right, var(--primary), var(--secondary)); border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; }
-   .wave-02{ opacity: 0.4; animation-duration: 30s; animation-direction: reverse; }
-   .wave-03{ opacity: 0.15; animation-duration: 40s; }
+   /* الأمواج الوردية الأصلية في الخلفية */
+   .wave-01, .wave-02, .wave-03{ 
+    position: absolute; width: 650px; height: 650px; 
+    background: linear-gradient(to top right, var(--primary), var(--secondary)); 
+    border-radius: 50%; top: -150%; left: -20%; animation: rotate 20s linear infinite; 
+   }
+   .wave-02{ opacity: 0.4; animation-duration: 30s; animation-direction: reverse; border-radius: 40%; top: -160%; left: -22%; }
+   .wave-03{ opacity: 0.15; animation-duration: 40s; border-radius: 45%; top: -140%; left: -18%; }
 
-   /* حاوية الصورة مع التموجات والنيون */
+   /* حاوية الصورة الشخصية */
    .profile_pic_content{ 
-    width: 170px; height: 170px; 
-    border-radius: 50%; 
+    width: 170px; height: 170px; border-radius: 50%; 
     position: absolute; left: 50%; top: 85%;
     transform: translate(-50%, -50%); 
     outline: 10px solid var(--front_color); 
     cursor: pointer; z-index: 20;
-    transition: all 0.4s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
    }
 
-   /* حالة تشغيل النيون عند الضغط */
+   /* نيون بسيط حول الصورة عند العمل */
    .profile_pic_content.playing {
-    box-shadow: 0 0 25px var(--red_neon), 0 0 50px var(--red_neon);
-    border: 2px solid var(--red_neon);
+    border: 1px solid var(--secondary);
+    box-shadow: 0 0 15px var(--secondary);
    }
 
-   /* طبقات التموجات النيون (تظهر عند التشغيل) */
-   .ripple {
-    position: absolute;
-    top: 50%; left: 50%;
+   /* تموجات الإيقاع الوردية خلف الصورة (نفس ألوان wave-01) */
+   .music-wave {
+    position: absolute; top: 50%; left: 50%;
     width: 100%; height: 100%;
-    background: var(--red_neon);
+    background: linear-gradient(to top right, var(--primary), var(--secondary));
     border-radius: 50%;
-    z-index: -1;
-    display: none; /* مخفية افتراضياً */
-    pointer-events: none;
+    z-index: -1; display: none; pointer-events: none;
    }
 
-   .profile_pic_content.playing .ripple {
-    display: block;
-    animation: rippleEffect 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+   .profile_pic_content.playing .music-wave {
+    display: block; animation: wavePulse 2s infinite ease-out;
    }
-   
-   .ripple:nth-child(1) { animation-delay: 0s; }
-   .ripple:nth-child(2) { animation-delay: 0.5s; }
-   .ripple:nth-child(3) { animation-delay: 1s; }
+   .music-wave:nth-child(2) { animation-delay: 0.6s; }
+   .music-wave:nth-child(3) { animation-delay: 1.2s; }
 
    .profile_pic{ width: 100%; height: 100%; border-radius: 100%; display: block; position: relative; z-index: 5; object-fit: cover; }
 
    .card_content{ position: relative; top: 0; text-align: center; padding: 70px 40px 20px 40px; }
-
-   .satan{ color: #FF0000; font-weight: 700; font-size: 1.8em; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); margin-top: 40px; }
-   .snuff{ margin-top: 15px; color: var(--muted_text); padding: 0px 10px; font-size: 1.1em; min-height: 110px; }
+   .satan{ color: #FF0000; font-weight: 700; font-size: 1.8em; text-shadow: 0 0 10px rgba(255, 0, 0, 0.6); margin-top: 40px; }
+   .snuff{ margin-top: 15px; color: var(--muted_text); min-height: 110px; }
 
    .social{ padding: 5px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; padding-bottom: 5px; }
    .social a{ text-decoration: none; color: var(--secondary); font-size: 2em; margin: 0 15px; }
@@ -123,9 +111,8 @@
     padding: 18px 30px; border-radius: 40px; color: var(--front_color); font-weight: 800;
     box-shadow: 0px 5px 20px rgba(0,0,0,0.4); border: 2px solid var(--front_color);
    }
-   .satanic:hover{ box-shadow: 0px 8px 30px var(--secondary); transform: scale(1.05); }
 
-   .separator-line { width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); margin: 20px auto 10px auto; border-radius: 2px; opacity: 0.7; }
+   .separator-line { width: 60%; height: 2px; background: linear-gradient(to right, transparent, var(--secondary), var(--primary), var(--secondary), transparent); margin: 20px auto 10px auto; opacity: 0.7; }
 
    @media (max-width: 600px) { .vcard { width: 95%; max-height: 95vh; height: auto; } }
   </style>
@@ -142,9 +129,9 @@
      <div class="wave-01"></div><div class="wave-02"></div><div class="wave-03"></div>
     </div>
     <div class="profile_pic_content" id="masterToggle">
-     <div class="ripple"></div>
-     <div class="ripple"></div>
-     <div class="ripple"></div>
+     <div class="music-wave"></div>
+     <div class="music-wave"></div>
+     <div class="music-wave"></div>
      <img class="profile_pic" src="https://files.catbox.moe/gmgpeo.jpg" alt="Profile Picture"/>
     </div>
    </div>
@@ -152,7 +139,7 @@
     <div class="satan"><h4>𝑹𝑶𝑯𝑨 - ✦</h4></div>
     <div class="snuff"><h5 class="typed_text"></h5></div>
     <div class="social">
-     <a href="https://t.me/Roha_us" aria-label="Telegram Account"><i aria-hidden="true" class="fa fa-telegram"></i></a>
+     <a href="https://t.me/Roha_us"><i class="fa fa-telegram"></i></a>
     </div>
     <div class="separator-line"></div>
     <a class="satanic" href="https://t.me/roha_info"><i class="fa fa-heart"></i> JOIN CHANNEL</a>
@@ -162,13 +149,12 @@
   <script>
    var typed = new Typed(".typed_text", {
     strings: ["𝐼 𝐴𝑀 𝑅𝑂𝐻𝐴, 𝐼 𝐿𝑂𝑆𝑇 ঌ<br>Telegram Channel : @roha_info <br> Telegram User : @Roha_us "],
-    typeSpeed: 10, backSpeed: 0, loop: false 
+    typeSpeed: 10, loop: false 
    });
 
    const audio = document.getElementById("myAudio");
    const toggleBtn = document.getElementById("masterToggle");
 
-   // تشغيل وإيقاف الصوت والنيون والتموجات بضغطة واحدة
    toggleBtn.addEventListener('click', () => {
        if (audio.paused) {
            audio.play();
@@ -179,7 +165,6 @@
        }
    });
 
-   // إيقاف عند مغادرة المتصفح
    document.addEventListener("visibilitychange", () => {
        if (document.hidden) {
            audio.pause();
